@@ -1,0 +1,16 @@
+{
+  "name": "threejs-vr",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --outDir=docs --base=/cmgt-logo-xr/"
+  },
+  "devDependencies": {
+    "vite": "^5.2.8"
+  },
+  "dependencies": {
+    "three": "^0.163.0"
+  }
+}
