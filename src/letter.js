@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Mesh, ObjectLoader, Path, Scene, BoxGeometry, MeshStandardMaterial, MathUtils, LineBasicMaterial, Vector3, BufferGeometry, Line, DoubleSide, Color, MeshPhongMaterial } from 'three';
 import jsonBlock from "./model.json" // gets parsed right away
 
 // tutorials
@@ -18,14 +18,14 @@ export class Letter {
     constructor(letterpoints, offset, scene, color) {
         this.scene = scene
         this.cubes = []
-        this.loader = new THREE.ObjectLoader()
+        this.loader = new ObjectLoader()
         this.baseColor = color
         let scale = 1
         
         // 2D path is needed to progress points along the path
         // somehow this path gets flipped ???
         letterpoints = letterpoints.map(p => [(p[0] + offset.x) * scale, (p[1] + offset.y) * scale])
-        this.path = new THREE.Path()
+        this.path = new Path()
         this.path.moveTo(letterpoints[0][0], letterpoints[0][1])
         for (let i = 1; i < letterpoints.length; i++) {
             this.path.lineTo(letterpoints[i][0], letterpoints[i][1])
@@ -47,9 +47,9 @@ export class Letter {
     // shows the path in the scene
     drawPath() {
         const points = this.path.getPoints();
-        const geometry = new THREE.BufferGeometry().setFromPoints(points);
-        const material = new THREE.LineBasicMaterial({ color: 0xffffff });
-        const line = new THREE.Line(geometry, material);
+        const geometry = new BufferGeometry().setFromPoints(points);
+        const material = new LineBasicMaterial({ color: 0xffffff });
+        const line = new Line(geometry, material);
         this.scene.add(line)
         line.position.z = -2   // line is flipped ????? suddenly -1 moves AWAY from the camera ?!?!?
     }
@@ -71,7 +71,7 @@ export class Letter {
             //bl.children[1].material.color = col
 
             // material should be PHONG to cast shadows
-            const phongMaterial = new THREE.MeshPhongMaterial({ color: col });
+            const phongMaterial = new MeshPhongMaterial({ color: col });
             bl.children.forEach(child => {
                 child.material = phongMaterial;
                 child.castShadow = true;
@@ -102,7 +102,7 @@ export class Letter {
         const r = (col.r + Math.random() / offset) / 2
         const g = (col.g + Math.random() / offset) / 2
         const b = (col.b + Math.random() / offset) / 2
-        return new THREE.Color(r, g, b);
+        return new Color(r, g, b);
     }
 
     // move cubes along the path

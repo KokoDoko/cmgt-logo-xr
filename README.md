@@ -13,7 +13,15 @@
 
 ## XR step 2
 
-- detect touch blocks? xr controller?
-- physics?
+- [xr controller](https://codingxr.com/articles/getting-started-with-webxr-and-threejs/)
+- detect gaze
+- detect touch blocks
+
+## XR step 3
+
+- physics
 - load detailed model from sketchfab / hr building
+
+## Links
+
 - react fiber?
